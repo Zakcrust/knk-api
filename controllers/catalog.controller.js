@@ -21,7 +21,7 @@ exports.create = async (req, res) => {
             })
         }
         const url = await util.saveFile(req.file,saveDir)
-        req.body.picture = url;
+        req.body.catalog_picture = url;
         const data = await catalog.create(req.body);
         return res.status(201).send({
             message: "catalog has been created",
