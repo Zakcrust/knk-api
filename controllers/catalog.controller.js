@@ -38,6 +38,11 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
     try {
+        if (req.file != undefined && req.file != null) {
+            const url = await util.saveFile(req.file, saveDir);
+            req.body.catalog_picture = url;
+        }
+        
         const data = await catalog.findByIdAndUpdate(req.params.id, req.body)
         if (data) {
             return res.status(200).send({
