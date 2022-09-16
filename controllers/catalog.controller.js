@@ -5,7 +5,7 @@ const catalog = mongoose.model("Catalog", catalogSchema);
 const axios = require('axios');
 require('dotenv').config();
 const util = require('../utils/upload.utis');
-const saveDir = 'catalog';
+const saveDir = 'images';
 exports.get = async (req, res) => {
     const data = await catalog.find({});
     return res.status(200).send({
