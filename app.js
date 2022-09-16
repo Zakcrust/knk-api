@@ -8,7 +8,7 @@ var usersRouter = require('./routes/user.routes');
 require('dotenv').config();
 const mongoose = require('mongoose');
 var app = express();
-mongoose.connect(process.env.CONNECTION_STRING).then((value) => {
+mongoose.connect(process.env.MONGO_URI).then((value) => {
   console.log("Connected to mongodb");
 }).catch((error) => {
   console.log(error);
