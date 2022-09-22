@@ -15,14 +15,21 @@ exports.get = async (req, res) => {
 }
 exports.create = async (req, res) => {
     try {
+        var data = {};
         if (req.file == undefined || req.file == null) {
-            return res.status(400).send({
-                message: "Catalog picture required"
-            })
+            // return res.status(400).send({
+            //     message: "Catalog picture required"
+            // })
+            data = await catalog.create({
+                catalog_name: req.body.catalog_name,
+                price: req.body.price
+            });
         }
-        const url = await util.saveFile(req.file,saveDir)
-        req.body.catalog_picture = url;
-        const data = await catalog.create(req.body);
+        else {
+            const url = await util.saveFile(req.file, saveDir)
+            req.body.catalog_picture = url;
+            data = await catalog.create(req.body);
+        }
         return res.status(201).send({
             message: "catalog has been created",
             data: data
@@ -42,7 +49,7 @@ exports.update = async (req, res) => {
             const url = await util.saveFile(req.file, saveDir);
             req.body.catalog_picture = url;
         }
-        
+
         const data = await catalog.findByIdAndUpdate(req.params.id, req.body)
         if (data) {
             return res.status(200).send({
