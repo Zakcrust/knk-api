@@ -29,15 +29,15 @@ module.exports = function (app) {
     });
 
     // @ts-ignore
-    app.post("/api/catalog/", [auth.verifyToken, upload.single('catalog_picture')], controller.create);
+    app.post("/api/catalog/", [upload.single('catalog_picture')], controller.create);
 
     // @ts-ignore
-    app.get("/api/catalog/", [auth.verifyToken], controller.get);
+    app.get("/api/catalog/", [], controller.get);
 
     // @ts-ignore
-    app.put("/api/catalog/update/:id", [auth.verifyToken], controller.update)
+    app.put("/api/catalog/update/:id", [], controller.update)
 
     // @ts-ignore
-    app.delete("/api/catalog/delete/:id", [auth.verifyToken], controller.delete)
+    app.delete("/api/catalog/delete/:id", [], controller.delete)
 
 };
