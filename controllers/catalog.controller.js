@@ -49,7 +49,8 @@ exports.update = async (req, res) => {
             const url = await util.saveFile(req.file, saveDir);
             req.body.catalog_picture = url;
         }
-
+        console.log(`update id ${req.params.id}`);
+        console.log(`update data ${req.body}`);
         const data = await catalog.findByIdAndUpdate(req.params.id, req.body)
         if (data) {
             return res.status(200).send({
